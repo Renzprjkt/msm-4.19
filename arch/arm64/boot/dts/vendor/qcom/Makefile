@@ -1,4 +1,6 @@
-ifneq ($(CONFIG_MACH_XIAOMI_OXYGEN),y)
+ifeq ($(CONFIG_YSL),y)
+dtb-$(CONFIG_ARCH_MSM8953) += ysl_msm8953.dtb
+else
 
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8016-sbc.dtb msm8916-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
@@ -192,8 +194,7 @@ ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 		sxr1130-usbc-mtp-overlay.dtbo \
 		sxr1130-usbc-pm660a-mtp-overlay.dtbo \
 		sxr1130-qrd-overlay.dtbo \
-		sxr1130-svr-overlay.dtbo \
-		sxr1130-arglass-overlay.dtbo
+		sxr1130-svr-overlay.dtbo
 
 sdm670-cdp-overlay.dtbo-base := sdm670.dtb
 sdm670-mtp-overlay.dtbo-base := sdm670.dtb
@@ -269,7 +270,6 @@ sxr1130-usbc-mtp-overlay.dtbo-base := sxr1130.dtb
 sxr1130-usbc-pm660a-mtp-overlay.dtbo-base := sxr1130.dtb
 sxr1130-qrd-overlay.dtbo-base := sxr1130.dtb
 sxr1130-svr-overlay.dtbo-base := sxr1130.dtb
-sxr1130-arglass-overlay.dtbo-base := sxr1130.dtb
 
 else
 dtb-$(CONFIG_ARCH_SDM670) += sdm670-rumi.dtb \
@@ -342,8 +342,7 @@ dtb-$(CONFIG_ARCH_SDM670) += sdm670-rumi.dtb \
 	sxr1130-usbc-mtp.dtb \
 	sxr1130-usbc-pm660a-mtp.dtb \
 	sxr1130-qrd.dtb \
-	sxr1130-svr.dtb \
-	sxr1130-arglass.dtb
+	sxr1130-svr.dtb
 endif
 
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
@@ -620,8 +619,7 @@ dtb-$(CONFIG_ARCH_MSM8909) += msm8909-pm8916-mtp.dtb \
 	msm8905-qrd-skub.dtb \
 	msm8905-qrd-sku3.dtb \
 	msm8909-mtp.dtb \
-	msm8909-1gb-mtp.dtb \
-	msm8909-1gb-qrd-skue.dtb
+	msm8909-1gb-mtp.dtb
 
 dtb-$(CONFIG_ARCH_SDM450) += sdm450-rcm.dtb \
 	sdm450-cdp.dtb \
@@ -679,13 +677,8 @@ dtb-$(CONFIG_ARCH_SDM429) += sdm429-mtp.dtb \
 endif
 
 dtb-$(CONFIG_ARCH_SDM845_VM) += sdm845-vm.dtb
-
-else # CONFIG_MACH_XIAOMI_OXYGEN
-
-dtb-$(CONFIG_MACH_XIAOMI_OXYGEN) += oxygen/msm8953-oxygen.dtb
-
-endif # CONFIG_MACH_XIAOMI_OXYGEN
+endif
 
 always		:= $(dtb-y)
 subdir-y	:= $(dts-dirs)
-clean-files	:= *.dtb *.dtbo
+clean-files	:= *.dtb
